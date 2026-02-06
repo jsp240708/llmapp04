@@ -54,7 +54,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: darryl1975/llm-frontend-python
+          images: jsp240708/llm-frontend-python
           tags: |
             type=sha
             type=ref,event=branch
@@ -67,7 +67,7 @@ jobs:
         with:
           context: llm-frontend-python
           load: true
-          tags: darryl1975/llm-frontend-python:scan
+          tags: jsp240708/llm-frontend-python:scan
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -76,7 +76,7 @@ jobs:
         env:
           TRIVY_DISABLE_VEX_NOTICE: "true"
         with:
-          image-ref: darryl1975/llm-frontend-python:scan
+          image-ref: jsp240708/llm-frontend-python:scan
           format: 'table'
           exit-code: '1'
           severity: 'CRITICAL,HIGH'
@@ -86,7 +86,7 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
         with:
-          username: darryl1975
+          username: jsp240708
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Push Docker image
